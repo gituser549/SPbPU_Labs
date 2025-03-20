@@ -1,2 +1,0 @@
-COURSE_LABS="T0 T2 T3"
-MAINTAINERS="volgarenok@gmail.com DKCherepovskiy@alfabank.ru gdk1743@gmail.com"

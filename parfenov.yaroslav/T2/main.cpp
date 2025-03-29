@@ -1,7 +1,10 @@
 
 #include <iostream>
 #include "DataStruct.h"
+#include <vector>
 #include <sstream>
+#include <iterator>
+#include <algorithm>
 
 int main()
 {

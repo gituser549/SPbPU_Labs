@@ -4,6 +4,7 @@
 #define DATA_STRUCT_H
 
 #include <iostream>
+#include <string>
 
 namespace parfenov
 {

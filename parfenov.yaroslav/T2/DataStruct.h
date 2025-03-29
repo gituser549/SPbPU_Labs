@@ -10,11 +10,11 @@ namespace parfenov
 
 struct DataStruct
 {
-    
+
     std::string key1;
     std::string key2;
     std::string key3;
-    
+
 };
 
 class ScopeGuard

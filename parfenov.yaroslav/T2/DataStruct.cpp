@@ -15,21 +15,21 @@ std::istream& operator>>(std::istream& in, DataStruct& dest)
     {
         return in;
     }
-    
+
     DataStruct input;
-    
+
     bool allIsOk = true;
-    
+
     char bracket = ' ';
     char separator = ' ';
-    
+
     std::string keyNum = "";
     std::string key = "";
-    
+
     std::string key1 = "";
     std::string key2 = "";
     std::string key3 = "";
-    
+
     do
     {
         in >> bracket;
@@ -38,7 +38,7 @@ std::istream& operator>>(std::istream& in, DataStruct& dest)
             allIsOk = false;
             //throw std::logic_error("");
         }
-        
+
         for (int i = 0; i < NUM_OF_FIELDS; i++)
         {
             in >> separator;
@@ -120,7 +120,7 @@ std::istream& operator>>(std::istream& in, DataStruct& dest)
                     break;
             }
         }
-        
+
         in >> separator;
         if (separator != ':')
         {
@@ -133,7 +133,7 @@ std::istream& operator>>(std::istream& in, DataStruct& dest)
             allIsOk = false;
             //throw std::logic_error("");
         }
-        
+
         if (allIsOk)
         {
             dest.key1 = input.key1;
@@ -144,10 +144,10 @@ std::istream& operator>>(std::istream& in, DataStruct& dest)
         {
             in.get();
         }
-        
+
     }
     while (!allIsOk && !in.eof());
-    
+
     return in;
 }
 
@@ -158,7 +158,7 @@ std::ostream& operator<<(std::ostream& out, const DataStruct& dest)
     {
         return out;
     }
-    
+
     {
         ScopeGuard guard(out);
 
@@ -170,9 +170,9 @@ std::ostream& operator<<(std::ostream& out, const DataStruct& dest)
             << dest.key3
             << ":)\n";
     }
-    
+
     return out;
-    
+
 }
 
 bool compareDataStructs(const DataStruct& first, const DataStruct& second)
@@ -186,7 +186,7 @@ bool compareDataStructs(const DataStruct& first, const DataStruct& second)
     {
         fKey1 = stoull(first.key1);
     }
-    
+
     if (second.key1.length() >= MIN_SYMB_IN_HEX_ULL && second.key1[1] == 'x')
     {
         sKey1 = stoull(second.key1, nullptr, 16);
@@ -195,7 +195,7 @@ bool compareDataStructs(const DataStruct& first, const DataStruct& second)
     {
         sKey1 = stoull(second.key1);
     }
-    
+
     if (fKey1 < sKey1)
     {
         return true;
@@ -208,7 +208,7 @@ bool compareDataStructs(const DataStruct& first, const DataStruct& second)
     {
 
         unsigned long long fKey2, sKey2;
-        
+
         if (first.key2.length() >= MIN_SYMB_IN_HEX_ULL && first.key2[1] == 'x')
         {
             fKey2 = stoull(first.key2, nullptr, 16);
@@ -217,7 +217,7 @@ bool compareDataStructs(const DataStruct& first, const DataStruct& second)
         {
             fKey2 = stoull(first.key2);
         }
-        
+
         if (second.key2.length() >= MIN_SYMB_IN_HEX_ULL && second.key2[1] == 'x')
         {
             sKey2 = stoull(second.key2, nullptr, 16);

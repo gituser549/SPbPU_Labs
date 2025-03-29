@@ -10,7 +10,8 @@ int main()
 {
     std::vector<parfenov::DataStruct> test;
     std::string inputStr;
-    std::getline(std::cin, inputStr);
+    std::cin >> inputStr;
+    //std::getline(std::cin, inputStr);
     std::istringstream iss(inputStr);
 
     std::copy(

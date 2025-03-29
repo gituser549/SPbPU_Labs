@@ -161,7 +161,7 @@ std::ostream& operator<<(std::ostream& out, const DataStruct& dest)
     
     {
         ScopeGuard guard(out);
-        
+
         out << "(:key1 "
             << dest.key1
             << ":key2 "
@@ -206,7 +206,7 @@ bool compareDataStructs(const DataStruct& first, const DataStruct& second)
     }
     else
     {
-        
+
         unsigned long long fKey2, sKey2;
         
         if (first.key2.length() >= MIN_SYMB_IN_HEX_ULL && first.key2[1] == 'x')
@@ -226,8 +226,8 @@ bool compareDataStructs(const DataStruct& first, const DataStruct& second)
         {
             sKey2 = stoull(second.key2);
         }
-        
-        
+
+
         if (fKey2 < sKey2)
         {
             return true;

@@ -107,11 +107,17 @@ std::istream& operator>>(std::istream& in, DataStruct& dest)
                     in.ignore();
                     std::getline(in, key3, ':');
                     in.putback(':');
+                    if (key3[0] == '\\' && key3[1] == '\"' && key3[key3.length()-2] == '\\' && key3[key3.length()-2] == '\"')
+                    {
+
+                    }
+                    /*
                     if (!std::regex_match(key3, std::regex("^\".+\"$")))
                     {
                         allIsOk = false;
                         //throw std::logic_error("");
                     }
+                     */
                     input.key3 = key3;
                     break;
                 default:

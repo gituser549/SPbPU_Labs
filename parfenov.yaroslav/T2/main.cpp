@@ -9,16 +9,14 @@
 int main()
 {
     std::vector<parfenov::DataStruct> test;
-    std::string inputStr;
-    std::cin >> inputStr;
-    //std::getline(std::cin, inputStr);
-    std::istringstream iss(inputStr);
-
-    std::copy(
-              std::istream_iterator<parfenov::DataStruct>(iss),
-              std::istream_iterator<parfenov::DataStruct>(),
-              std::back_inserter(test)
-              );
+    while (!std::cin.eof())
+    {
+        std::copy(
+                  std::istream_iterator<parfenov::DataStruct>(std::cin),
+                  std::istream_iterator<parfenov::DataStruct>(),
+                  std::back_inserter(test)
+                  );
+    }
 
     std::sort(
               test.begin(),

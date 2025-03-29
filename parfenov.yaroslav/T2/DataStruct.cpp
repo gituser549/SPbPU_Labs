@@ -86,7 +86,7 @@ std::istream& operator>>(std::istream& in, DataStruct& dest)
                         allIsOk = false;
                         //throw std::logic_error("");
                     }
-                    for (int i = 0; i < key2.length(); i++)
+                    for (unsigned long int i = 0; i < key2.length(); i++)
                     {
                         if ((key2[i] >= 'a' && key2[i] <= 'f'))
                         {

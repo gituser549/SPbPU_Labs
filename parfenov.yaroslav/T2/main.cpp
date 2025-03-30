@@ -8,26 +8,26 @@
 
 int main()
 {
-    std::vector<parfenov::DataStruct> test;
+    std::vector<parfenov::DataStruct> inputVector;
     while (!std::cin.eof())
     {
         std::copy(
                   std::istream_iterator<parfenov::DataStruct>(std::cin),
                   std::istream_iterator<parfenov::DataStruct>(),
-                  std::back_inserter(test)
+                  std::back_inserter(inputVector)
                   );
     }
 
     std::sort(
-              test.begin(),
-              test.end(),
+              inputVector.begin(),
+              inputVector.end(),
               parfenov::compareDataStructs
               );
     std::copy(
-              test.begin(),
-              test.end(),
+              inputVector.begin(),
+              inputVector.end(),
               std::ostream_iterator<parfenov::DataStruct>(std::cout, "")
               );
 
-    return 0;
+    return EXIT_SUCCESS;
 }

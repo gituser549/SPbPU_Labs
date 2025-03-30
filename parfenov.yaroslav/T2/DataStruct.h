@@ -9,11 +9,13 @@
 namespace parfenov
 {
 
+using ULL = unsigned long long;
+
 struct DataStruct
 {
 
-    std::string key1;
-    std::string key2;
+    ULL key1;
+    ULL key2;
     std::string key3;
 
 };
@@ -37,7 +39,6 @@ std::ostream& operator<<(std::ostream& out, const DataStruct& dest);
 bool compareDataStructs(const DataStruct& first, const DataStruct& second);
 
 void ignoreTillBracket(std::istream& in);
-void makeUpperCase(std::string& str);
 
 }
 

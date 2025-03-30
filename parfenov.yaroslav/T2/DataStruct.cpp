@@ -35,6 +35,7 @@ std::istream& operator>>(std::istream& in, DataStruct& dest)
         {
             in >> separator;
             in >> keyNum;
+
             switch (keyNum[3])
             {
                 case '1':
@@ -46,10 +47,6 @@ std::istream& operator>>(std::istream& in, DataStruct& dest)
                     {
                         allIsOk = false;
                         ignoreTillBracket(in);
-                    }
-                    else
-                    {
-                        key1 = key1.substr(0, key1.length() - 3) + "ull";
                     }
                     break;
                 }
@@ -63,12 +60,6 @@ std::istream& operator>>(std::istream& in, DataStruct& dest)
                     {
                         allIsOk = false;
                         ignoreTillBracket(in);
-                    }
-                    else
-                    {
-                        key2 = key2.substr(2, key2.length() - 2);
-                        makeUpperCase(key2);
-                        key2 = "0x" + key2;
                     }
                     break;
                 }
@@ -88,15 +79,15 @@ std::istream& operator>>(std::istream& in, DataStruct& dest)
             in >> separator;
             in >> bracket;
 
-            dest.key1 = key1;
-            dest.key2 = key2;
+            dest.key1 = stoull(key1);
+            dest.key2 = stoull(key2, nullptr, 16);
             dest.key3 = key3;
         }
         else
         {
             char testEnd;
             in >> testEnd;
-            if (testEnd == '(')
+            if (testEnd == '(' && !in.eof())
             {
                 in.putback('(');
             }
@@ -121,35 +112,32 @@ std::ostream& operator<<(std::ostream& out, const DataStruct& dest)
 
         out << "(:key1 "
             << dest.key1
-            << ":key2 "
+            << "ull"
+            << ":key2 0x"
+            << std::hex
+            << std::uppercase
             << dest.key2
             << ":key3 "
             << dest.key3
             << ":)\n";
     }
-
     return out;
 
 }
 
 bool compareDataStructs(const DataStruct& first, const DataStruct& second)
 {
-    unsigned long int fKey1 = stoull(first.key1),
-        fKey2 = stoull(first.key2, nullptr, 16),
-        sKey1 = stoull(second.key1),
-        sKey2 = stoull(second.key2, nullptr, 16);
-
-    if (fKey1 < sKey1)
+    if (first.key1 < second.key1)
     {
         return true;
     }
-    else if (fKey1 == sKey1)
+    else if (first.key1 == second.key1)
     {
-        if (fKey2 < sKey2)
+        if (first.key2 < second.key2)
         {
             return true;
         }
-        else if (fKey2 == sKey2)
+        else if (first.key2 == second.key2)
         {
             if (first.key3.length() < second.key3.length())
             {
@@ -162,7 +150,12 @@ bool compareDataStructs(const DataStruct& first, const DataStruct& second)
 
 void ignoreTillBracket(std::istream& in)
 {
-    char prev, cur;
+    std::istream::sentry sentry(in);
+    if (!sentry)
+    {
+        return;
+    }
+    char prev = ' ', cur = ' ';
     cur = in.get();
     do
     {
@@ -170,17 +163,6 @@ void ignoreTillBracket(std::istream& in)
         cur = in.get();
     }
     while (!(cur == ')' && prev == ':'));
-}
-
-void makeUpperCase(std::string& str)
-{
-    for (unsigned long int i = 2; i < str.length(); i++)
-    {
-        if (str[i] >= 'a' && str[i] <= 'f')
-        {
-            str[i] = toupper(str[i]);
-        }
-    }
 }
 
 

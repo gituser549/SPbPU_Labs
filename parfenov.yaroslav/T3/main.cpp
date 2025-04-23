@@ -11,12 +11,19 @@ int main(int argc, char* argv[])
 
     if (argc < 2)
     {
-        return -1;
+        std::cerr << "You should use ./lab <filename>" << "\n";
+        return 1;
     }
 
     std::string filename = argv[1];
 
     std::ifstream in(filename);
+
+    if (!in)
+    {
+        std::cerr << "Incorrect file" << "\n";
+        return 1;
+    }
 
     parfenov::startInterface(in);
 

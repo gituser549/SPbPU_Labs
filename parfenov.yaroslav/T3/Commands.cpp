@@ -14,7 +14,7 @@ const std::regex COMMANDS_MAX = std::regex("MAX (AREA|VERTEXES)");
 const std::regex COMMANDS_MIN = std::regex("MIN (AREA|VERTEXES)");
 const std::regex COMMANDS_COUNT = std::regex("COUNT (EVEN|ODD|([1-9][0-9]*))");
 const std::regex COMMANDS_RMECHO = std::regex("RMECHO ([0]|[1-9][0-9]*) \\(([0]|[1-9][0-9]*);([0]|[1-9][0-9]*)\\)");
-const std::regex COMMANDS_INTERSECTION = std::regex("INTERSECTION ([0]|[1-9][0-9]*) \\(([0]|[1-9][0-9]*);([0]|[1-9][0-9]*)\\)");
+const std::regex COMMANDS_INTERSECTIONS = std::regex("INTERSECTIONS ([0]|[1-9][0-9]*) \\(([0]|[1-9][0-9]*);([0]|[1-9][0-9]*)\\)");
 
 std::istream& operator>>(std::istream& in, Command& cmd)
 {
@@ -48,18 +48,36 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
         }
         else if (curCommand == "AREA MEAN")
         {
-            std::cout << getAreaMean(polygons) << "\n";
+            if (!polygons.empty())
+            {
+                std::cout << getAreaMean(polygons) << "\n";
+            }
+            else
+            {
+                std::cerr << "<INVALID COMMAND>" << "\n";
+                return false;
+            }
         }
         else
         {
             std::istringstream commandIn(curCommand.substr(5, curCommand.length() - 5));
             unsigned long int numPoints;
             commandIn >> numPoints;
+            if (numPoints < 3)
+            {
+                std::cerr << "<INVALID COMMAND>" << "\n";
+                return false;
+            }
             std::cout << getAreaFixedPointNum(polygons, numPoints) << "\n";
         }
     }
     else if (std::regex_match(curCommand, COMMANDS_MAX))
     {
+        if (polygons.empty())
+        {
+            std::cerr << "<INVALID COMMAND>" << "\n";
+            return false;
+        }
         if (curCommand == "MAX AREA")
         {
             std::cout << std::fixed << std::setprecision(1) << getMaxOrMinAreaOrPoints(polygons, "AREA", "MAX") << "\n";
@@ -71,6 +89,11 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
     }
     else if (std::regex_match(curCommand, COMMANDS_MIN))
     {
+        if (polygons.empty())
+        {
+            std::cerr << "<INVALID COMMAND>" << "\n";
+            return false;
+        }
         if (curCommand == "MIN AREA")
         {
             std::cout << std::fixed << std::setprecision(1) << getMaxOrMinAreaOrPoints(polygons, "AREA", "MIN") << "\n";
@@ -95,6 +118,11 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
             std::istringstream commandIn(curCommand.substr(6, curCommand.length() - 6));
             unsigned long int numPoints;
             commandIn >> numPoints;
+            if (numPoints < 3)
+            {
+                std::cerr << "<INVALID COMMAND>" << "\n";
+                return false;
+            }
             std::cout << getCountExactNumPts(polygons, numPoints) << "\n";
         }
     }
@@ -105,7 +133,7 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
         commandIn >> pol;
         std::cout << eraseDuplicatesInARow(polygons, pol) << "\n";
     }
-    else if (std::regex_match(curCommand, COMMANDS_INTERSECTION))
+    else if (std::regex_match(curCommand, COMMANDS_INTERSECTIONS))
     {
         std::istringstream commandIn(curCommand.substr(14, curCommand.length() - 14));
         Polygon pol;

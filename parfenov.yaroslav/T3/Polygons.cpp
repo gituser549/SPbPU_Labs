@@ -435,7 +435,7 @@ long areAnyIntersections(const std::vector<Polygon>& pols, const Polygon& pol)
  const std::regex COMMANDS_MIN = std::regex("MIN (AREA|VERTEXES)");
  const std::regex COMMANDS_COUNT = std::regex("COUNT (EVEN|ODD|([1-9][0-9]*))");
  const std::regex COMMANDS_RMECHO = std::regex("RMECHO ([0]|[1-9][0-9]*) \\(([0]|[1-9][0-9]*);([0]|[1-9][0-9]*)\\)");
- const std::regex COMMANDS_INTERSECTION = std::regex("INTERSECTION ([0]|[1-9][0-9]*) \\(([0]|[1-9][0-9]*);([0]|[1-9][0-9]*)\\)");
+ const std::regex COMMANDS_INTERSECTIONS = std::regex("INTERSECTIONS ([0]|[1-9][0-9]*) \\(([0]|[1-9][0-9]*);([0]|[1-9][0-9]*)\\)");
  */
 
 }

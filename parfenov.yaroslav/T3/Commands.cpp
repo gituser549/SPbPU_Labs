@@ -53,7 +53,7 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
         else
         {
             std::istringstream commandIn(curCommand.substr(5, curCommand.length() - 5));
-            int numPoints;
+            unsigned long int numPoints;
             commandIn >> numPoints;
             std::cout << getAreaFixedPointNum(polygons, numPoints) << "\n";
         }
@@ -93,7 +93,7 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
         else
         {
             std::istringstream commandIn(curCommand.substr(6, curCommand.length() - 6));
-            int numPoints;
+            unsigned long int numPoints;
             commandIn >> numPoints;
             std::cout << getCountExactNumPts(polygons, numPoints) << "\n";
         }

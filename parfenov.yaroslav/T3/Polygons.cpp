@@ -100,7 +100,7 @@ std::istream& operator>>(std::istream& in, Polygon& fig)
     {
         return in;
     }
-    int numPoints = 0;
+    long unsigned int numPoints = 0;
     in >> numPoints;
     in.ignore();
 
@@ -213,7 +213,7 @@ double getAreaMean(const std::vector<Polygon>& pols)
     return ans;
 }
 
-double getAreaFixedPointNum(const std::vector<Polygon>& polygons, const int& pointNum)
+double getAreaFixedPointNum(const std::vector<Polygon>& polygons, const unsigned long int& pointNum)
 {
     double ans = 0;
     std::vector<Polygon> neededPols;
@@ -302,7 +302,7 @@ long getCountEvenOrOddPts(const std::vector<Polygon>& polygons, const std::strin
     return ans;
 }
 
-long getCountExactNumPts(const std::vector<Polygon>& polygons, const int& numVerts)
+long getCountExactNumPts(const std::vector<Polygon>& polygons, const unsigned long int& numVerts)
 {
     long ans = 0;
     ans = std::count_if(

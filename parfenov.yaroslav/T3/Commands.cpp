@@ -54,7 +54,7 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
             }
             else
             {
-                std::cerr << "<INVALID COMMAND>" << "\n";
+                std::cout << "<INVALID COMMAND>" << "\n";
                 return false;
             }
         }
@@ -65,7 +65,7 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
             commandIn >> numPoints;
             if (numPoints < 3)
             {
-                std::cerr << "<INVALID COMMAND>" << "\n";
+                std::cout << "<INVALID COMMAND>" << "\n";
                 return false;
             }
             std::cout << getAreaFixedPointNum(polygons, numPoints) << "\n";
@@ -75,7 +75,7 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
     {
         if (polygons.empty())
         {
-            std::cerr << "<INVALID COMMAND>" << "\n";
+            std::cout << "<INVALID COMMAND>" << "\n";
             return false;
         }
         if (curCommand == "MAX AREA")
@@ -91,7 +91,7 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
     {
         if (polygons.empty())
         {
-            std::cerr << "<INVALID COMMAND>" << "\n";
+            std::cout << "<INVALID COMMAND>" << "\n";
             return false;
         }
         if (curCommand == "MIN AREA")
@@ -120,7 +120,7 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
             commandIn >> numPoints;
             if (numPoints < 3)
             {
-                std::cerr << "<INVALID COMMAND>" << "\n";
+                std::cout << "<INVALID COMMAND>" << "\n";
                 return false;
             }
             std::cout << getCountExactNumPts(polygons, numPoints) << "\n";
@@ -142,7 +142,7 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
     }
     else
     {
-        std::cerr << "<INVALID COMMAND>" << "\n";
+        std::cout << "<INVALID COMMAND>" << "\n";
         return false;
     }
     return true;

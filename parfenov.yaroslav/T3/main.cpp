@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
 
     if (argc < 2)
     {
-        std::cerr << "You should use ./lab <filename>" << "\n";
+        std::cout << "You should use ./lab <filename>" << "\n";
         return 1;
     }
 
@@ -21,7 +21,7 @@ int main(int argc, char* argv[])
 
     if (!in)
     {
-        std::cerr << "Incorrect file" << "\n";
+        std::cout << "Incorrect file" << "\n";
         return 1;
     }
 

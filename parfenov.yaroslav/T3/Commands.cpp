@@ -150,11 +150,6 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
 
 void startInterface(std::ifstream& in)
 {
-    std::istream::sentry sentry(in);
-    if (!sentry)
-    {
-        return;
-    }
     std::vector<Polygon> polygons;
     std::copy_if(
                  std::istream_iterator<Polygon>(in),

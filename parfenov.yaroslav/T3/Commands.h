@@ -5,6 +5,8 @@
 #include <iostream>
 #include <fstream>
 #include "Polygons.h"
+#include <vector>
+#include <string>
 
 namespace parfenov
 {

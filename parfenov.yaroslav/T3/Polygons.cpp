@@ -4,6 +4,7 @@
 #include <regex>
 #include <algorithm>
 #include <numeric>
+#include <functional>
 
 namespace parfenov
 {

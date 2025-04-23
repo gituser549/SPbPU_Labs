@@ -3,6 +3,8 @@
 #define POLYGONS_H
 
 #include <iostream>
+#include <vector>
+#include <string>
 
 namespace parfenov
 {

@@ -4,6 +4,7 @@
 #include "Commands.h"
 #include "Polygons.h"
 #include "ScopeGuard.h"
+#include <string>
 
 int main(int argc, char* argv[])
 {

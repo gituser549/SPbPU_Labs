@@ -142,6 +142,11 @@ std::istream& operator>>(std::istream& in, Polygon& fig)
                        );
     }
 
+    if (fig.points.size() < 3)
+    {
+        fig.points.clear();
+    }
+
     return in;
 }
 

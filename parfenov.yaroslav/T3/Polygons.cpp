@@ -33,13 +33,6 @@ bool Polygon::operator==(const Polygon& pol) const
                             pol.points.cbegin(),
                             std::bind(std::equal_to<Point>(), _1, _2)
                             );
-        /*
-         result = std::all_of(
-         points.cbegin(),
-         points.cend(),
-         [&i, &pol](const Point pt) { return (pt == pol.points[i++]); }
-         );
-         */
     }
     return result;
 }
@@ -52,13 +45,6 @@ int getFirstCoord(std::string coords)
                               coords.cend(),
                               std::bind(std::equal_to<char>(), _1, ';')
                               );
-    /*
-     auto itEnd = std::find_if(
-     coords.cbegin() + 1,
-     coords.cend(),
-     [](char symb) { return symb == ';'; }
-     );
-     */
     std::string subStr;
     std::copy(
               coords.cbegin(),
@@ -76,13 +62,6 @@ int getSecondCoord(std::string coords)
                                 coords.cend(),
                                 std::bind(std::equal_to<char>(), _1, ';')
                                 );
-    /*
-     auto itBegin = std::find_if(
-     coords.cbegin() + 1,
-     coords.cend(),
-     [](char symb) { return symb == ';'; }
-     );
-     */
     std::string subStr;
     std::copy(
               itBegin,
@@ -248,7 +227,6 @@ double getMaxOrMinAreaOrPoints(const std::vector<Polygon>& polygons, const std::
                        polygons.cend(),
                        std::back_inserter(areas),
                        std::bind(&getAreaOfPolygon, _1)
-                       //[](const Polygon& pol) { return getAreaOfPolygon(pol); }
                        );
         if (minOrMax == "MAX")
         {
@@ -362,18 +340,11 @@ bool haveIntersectionsPolTwoPoints(const Point& pt1, const Point& pt2, const Pol
                    longerPol.points.cbegin() + 1,
                    std::back_inserter(innerResIns),
                    std::bind(&areIntersectPoints, pt1, pt2, _1, _2)
-                   /*
-                    [&pt1, &pt2](const Point& pt3, const Point& pt4)
-                    {
-                    return areIntersectPoints(pt1, pt2, pt3, pt4);
-                    }
-                    */
                    );
     return std::any_of(
                        innerResIns.cbegin(),
                        innerResIns.cend(),
                        std::bind(std::equal_to<bool>(), _1, true)
-                       //[](const bool& res) { return res; }
                        );
 }
 
@@ -398,19 +369,12 @@ bool haveIntersectionsPolygons(const Polygon& pol1, const Polygon& pol2)
                    shorterPol.points.cbegin() + 1,
                    std::back_inserter(resIns),
                    std::bind(&haveIntersectionsPolTwoPoints, _1, _2, longerPol)
-                   /*
-                    [&longerPol](const Point& pt1, const Point& pt2)
-                    {
-                    return haveIntersectionsPolTwoPoints(pt1, pt2, longerPol);
-                    }
-                    */
                    );
 
     return std::any_of(
                        resIns.cbegin(),
                        resIns.cend(),
                        std::bind(std::equal_to<bool>(), _1, true)
-                       //[](const bool& res) { return res; }
                        );
 }
 
@@ -422,7 +386,6 @@ long areAnyIntersections(const std::vector<Polygon>& pols, const Polygon& pol)
                    pols.cend(),
                    std::back_inserter(res),
                    std::bind(&haveIntersectionsPolygons, pol, _1)
-                   //[&pol](const Polygon& pol2) { return haveIntersectionsPolygons(pol, pol2); }
                    );
 
     return std::count_if(
@@ -431,16 +394,5 @@ long areAnyIntersections(const std::vector<Polygon>& pols, const Polygon& pol)
                          std::bind(std::equal_to<bool>(), _1, true)
                          );
 }
-
-/*
- const std::regex ANY_NUMBER = std::regex("([0]|[1-9][0-9]*)");
- const std::regex COORD_PAIR = std::regex("\\(([0]|[1-9][0-9]*);([0]|[1-9][0-9]*)\\)");
- const std::regex COMMANDS_AREA = std::regex("AREA (EVEN|ODD|MEAN|([1-9][0-9]*))");
- const std::regex COMMANDS_MAX = std::regex("MAX (AREA|VERTEXES)");
- const std::regex COMMANDS_MIN = std::regex("MIN (AREA|VERTEXES)");
- const std::regex COMMANDS_COUNT = std::regex("COUNT (EVEN|ODD|([1-9][0-9]*))");
- const std::regex COMMANDS_RMECHO = std::regex("RMECHO ([0]|[1-9][0-9]*) \\(([0]|[1-9][0-9]*);([0]|[1-9][0-9]*)\\)");
- const std::regex COMMANDS_INTERSECTIONS = std::regex("INTERSECTIONS ([0]|[1-9][0-9]*) \\(([0]|[1-9][0-9]*);([0]|[1-9][0-9]*)\\)");
- */
 
 }

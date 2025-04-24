@@ -48,15 +48,12 @@ bool doCommand(std::vector<Polygon>& polygons, const std::string& curCommand)
         }
         else if (curCommand == "AREA MEAN")
         {
-            if (!polygons.empty())
-            {
-                std::cout << getAreaMean(polygons) << "\n";
-            }
-            else
+            if (polygons.empty())
             {
                 std::cout << "<INVALID COMMAND>" << "\n";
                 return false;
             }
+            std::cout << getAreaMean(polygons) << "\n";
         }
         else
         {

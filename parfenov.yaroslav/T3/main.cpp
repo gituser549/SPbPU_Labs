@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
     if (argc < 2)
     {
         std::cout << "You should use ./lab <filename>" << "\n";
-        return 1;
+        return EXIT_FAILURE;
     }
 
     std::string filename = argv[1];
@@ -22,12 +22,12 @@ int main(int argc, char* argv[])
     if (!in)
     {
         std::cout << "Incorrect file" << "\n";
-        return 1;
+        return EXIT_FAILURE;
     }
 
     parfenov::startInterface(in);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
 
 

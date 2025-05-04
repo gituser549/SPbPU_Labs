@@ -4,6 +4,7 @@
 #include <sstream>
 #include <regex>
 #include <iomanip>
+#include <iterator>
 
 namespace parfenov
 {
